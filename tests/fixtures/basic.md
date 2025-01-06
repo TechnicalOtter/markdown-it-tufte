@@ -1,13 +1,6 @@
-test 1
+new thought
 .
-content
+^The quick brown fox^ jumps over the lazy dog.
 .
-<p style="color:blue;">content</p>
-.
-
-test 2
-.
-*other content*
-.
-<p style="color:blue;"><em>other content</em></p>
+<p><span class="newthought">The quick brown fox</span> jumps over the lazy dog.</p>
 .

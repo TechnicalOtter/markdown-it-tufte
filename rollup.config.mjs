@@ -18,13 +18,13 @@ export default {
     {
       file: "dist/index.umd.js",
       format: "umd", // commonJS
-      name: "markdownitExample", // window.name if script loaded directly in browser
+      name: "markdownitTufte", // window.name if script loaded directly in browser
       sourcemap: true
     },
     {
       file: "dist/index.umd.min.js",
       format: "umd",
-      name: "markdownitExample",
+      name: "markdownitTufte",
       plugins: [terser()],
       sourcemap: true
     },

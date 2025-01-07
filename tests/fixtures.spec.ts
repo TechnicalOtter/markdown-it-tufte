@@ -18,8 +18,8 @@ function readFixtures(name: string): string[][] {
   return fixtures.split("\n.\n\n").map(s => s.split("\n.\n"))
 }
 
-describe("Parses basic", () => {
-  readFixtures("basic").forEach(([name, text, expected]) => {
+describe("Parses newthought", () => {
+  readFixtures("newthought").forEach(([name, text, expected]) => {
     const mdit = MarkdownIt().use(example_plugin)
     const rendered = mdit.render(text)
     it(name, () => expect(rendered).toEqual(`${expected}\n`))

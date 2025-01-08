@@ -121,15 +121,12 @@ export default function footnote_plugin(md: MarkdownIt) {
 
     state.md.block.tokenize(state, startLine, endLine)
     const footnoteTokens = state.tokens.splice(oldLength - state.tokens.length)
-    // console.log(footnoteTokens)
     footnoteTokens.forEach(token => {
       if (token.type === "inline") {
         token.children ||= []
         state.md.inline.parse(token.content, state.md, state.env, token.children)
-        console.log(token.children)
       }
     })
-    // console.log(footnoteTokens)
     state.env.footnotes.defs[`:${label}`] = footnoteTokens
 
     state.blkIndent -= 4
@@ -207,7 +204,6 @@ export default function footnote_plugin(md: MarkdownIt) {
         if (expandedTokens.length > 1) tokens.splice(i, 1, ...expandedTokens)
       }
     }
-    console.log(tokens)
   }
 
   md.block.ruler.before("reference", "footnote_def", footnote_def)

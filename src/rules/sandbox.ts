@@ -27,7 +27,7 @@ function render_footnote_ref(
   env: any,
   slf: Renderer
 ) {
-  return `<aside>footnote</aside>`
+  return `\n<label for="sn-" class="margin-toggle sidenote-number"></label>\n<input id="sn-" type="checkbox" class="margin-toggle">\n`
 }
 
 export default function footnote_plugin(md: MarkdownIt) {
@@ -195,9 +195,13 @@ export default function footnote_plugin(md: MarkdownIt) {
 
           const newInline = new state.Token("inline", "", 0)
           newInline.children = token.children.splice(0, refIdx + 1)
+          const openSpan = new state.Token("span", "span", 1)
+          openSpan.attrSet("class", "sidenote")
 
           expandedTokens.push(newInline)
+          expandedTokens.push(openSpan)
           expandedTokens.push(...blocks)
+          expandedTokens.push(new state.Token("span", "span", -1))
         }
         expandedTokens.push(token)
         if (expandedTokens.length > 1) tokens.splice(i, 1, ...expandedTokens)

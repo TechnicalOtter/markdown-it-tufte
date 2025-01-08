@@ -3,9 +3,6 @@ Creates an inline sidenote
 Edward Tufte popularized moving footnotes[^1] into the margin next to the relevant text.
 
 [^1]: Comments and asides that are tangential to the flow of the primary document.
-This sentence should stay within the footnote.
-
-    Maybe this sentence, too?
 
 Here is an entirely separate paragraph.
 .
@@ -14,3 +11,4 @@ Here is an entirely separate paragraph.
 <input id="sn-" type="checkbox" class="margin-toggle">
 <span class="sidenote">Comments and asides that are tangential to the flow of the primary document.</span>
  into the margin next to the relevant text.</p>
+<p>Here is an entirely separate paragraph.</p>

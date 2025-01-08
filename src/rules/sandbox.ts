@@ -2,9 +2,10 @@
 import MarkdownIt, { Options } from "markdown-it"
 import Renderer from "markdown-it/lib/renderer"
 import StateBlock from "markdown-it/lib/rules_block/state_block"
+import StateInline from "markdown-it/lib/rules_inline/state_inline"
 import Token from "markdown-it/lib/token"
 
-function render_footnote_def(
+function render_footnote_ref(
   tokens: Token[],
   idx: number,
   options: Options,
@@ -15,7 +16,7 @@ function render_footnote_def(
 }
 
 export default function footnote_plugin(md: MarkdownIt) {
-  md.renderer.rules.footnote_def = render_footnote_def
+  md.renderer.rules.footnote_ref = render_footnote_ref
 
   // Process footnote block definition
   function footnote_def(
@@ -118,5 +119,43 @@ export default function footnote_plugin(md: MarkdownIt) {
     return true
   }
 
+  function footnote_ref(state: StateInline, silent: boolean) {
+    const max = state.posMax
+    const start = state.pos
+
+    // should be at least 4 chars - "[^x]"
+    if (start + 3 > max) return false
+
+    if (!state.env.footnotes || !state.env.footnotes.defs) return false
+    if (state.src.charCodeAt(start) !== 0x5b /* [ */) return false
+    if (state.src.charCodeAt(start + 1) !== 0x5e /* ^ */) return false
+
+    let pos
+
+    for (pos = start + 2; pos < max; pos++) {
+      if (state.src.charCodeAt(pos) === 0x20) return false
+      if (state.src.charCodeAt(pos) === 0x0a) return false
+      if (state.src.charCodeAt(pos) === 0x5d /* ] */) {
+        break
+      }
+    }
+
+    if (pos === start + 2) return false // no empty footnote labels
+    if (pos >= max) return false
+    pos++
+
+    const label = state.src.slice(start + 2, pos - 1)
+    if (typeof state.env.footnotes.defs[`:${label}`] === "undefined") return false
+
+    if (!silent) {
+      const token = state.push("footnote_ref", "", 0)
+      token.meta = { blocks: state.env.footnotes.defs[`:${label}`] }
+    }
+
+    state.pos = pos
+    return true
+  }
+
   md.block.ruler.before("reference", "footnote_def", footnote_def)
+  md.inline.ruler.after("image", "footnote_ref", footnote_ref)
 }

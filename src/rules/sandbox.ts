@@ -1,9 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import MarkdownIt, { Options } from "markdown-it"
 import Renderer from "markdown-it/lib/renderer"
 import StateBlock from "markdown-it/lib/rules_block/state_block"
+import StateCore from "markdown-it/lib/rules_core/state_core"
 import StateInline from "markdown-it/lib/rules_inline/state_inline"
 import Token from "markdown-it/lib/token"
+
+// ###############################
+// I think the goal is to first find footnote references,
+// [^label] or ^[inline footnote content],
+// and split them off into their own block-level tokens.
+
+// WAIT: if footnote refs appear inside other blocks, we DO NOT want to split them.
+
+// Instead, let's define a `footnote_ref` token within an inline step,
+// then in a post-inline core rule, split inline tokens on the `footnote_ref` entries!
+
+// Then, after all block and inline renderers,
+// Cut the footnote definition tokens out of their old location,
+// and splice them into wherever the reference token is.
+// ###############################
 
 function render_footnote_ref(
   tokens: Token[],
@@ -104,12 +119,18 @@ export default function footnote_plugin(md: MarkdownIt) {
       state.sCount[startLine] += state.blkIndent
     }
 
-    console.log(state.tokens)
     state.md.block.tokenize(state, startLine, endLine)
-    console.log(state.tokens)
-    state.env.footnotes.defs[`:${label}`] = state.tokens.splice(
-      oldLength - state.tokens.length
-    )
+    const footnoteTokens = state.tokens.splice(oldLength - state.tokens.length)
+    // console.log(footnoteTokens)
+    footnoteTokens.forEach(token => {
+      if (token.type === "inline") {
+        token.children ||= []
+        state.md.inline.parse(token.content, state.md, state.env, token.children)
+        console.log(token.children)
+      }
+    })
+    // console.log(footnoteTokens)
+    state.env.footnotes.defs[`:${label}`] = footnoteTokens
 
     state.blkIndent -= 4
     state.tShift[startLine] = oldTShift
@@ -156,6 +177,36 @@ export default function footnote_plugin(md: MarkdownIt) {
     return true
   }
 
+  function footnote_tail(state: StateCore) {
+    const { tokens } = state
+
+    // Iterate backwards because we will be inserting blocks
+    for (let i = tokens.length - 1; i >= 0; i--) {
+      const token = tokens[i]
+      if (token.type === "inline" && token.children) {
+        const expandedTokens = []
+        let refIdx
+        while (
+          (refIdx = token.children.findIndex(token => token.type === "footnote_ref")) >
+          0
+        ) {
+          const refToken = token.children[refIdx]
+          const { blocks } = refToken.meta
+
+          const newInline = new state.Token("inline", "", 0)
+          newInline.children = token.children.splice(0, refIdx + 1)
+
+          expandedTokens.push(newInline)
+          expandedTokens.push(...blocks)
+        }
+        expandedTokens.push(token)
+        if (expandedTokens.length > 1) tokens.splice(i, 1, ...expandedTokens)
+      }
+    }
+    console.log(tokens)
+  }
+
   md.block.ruler.before("reference", "footnote_def", footnote_def)
   md.inline.ruler.after("image", "footnote_ref", footnote_ref)
+  md.core.ruler.after("inline", "footnote_tail", footnote_tail)
 }

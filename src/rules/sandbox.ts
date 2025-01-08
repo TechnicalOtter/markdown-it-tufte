@@ -52,6 +52,14 @@ export default function footnote_plugin(md: MarkdownIt) {
     pos++
 
     // #############
+    // ### STORE ###
+    // #############
+
+    if (!state.env.footnotes) state.env.footnotes = {}
+    if (!state.env.footnotes.defs) state.env.footnotes.defs = {}
+    const label = state.src.slice(start + 2, pos - 2)
+
+    // #############
     // ### PARSE ###
     // #############
     // Set the indent to "inside" the footnote, and tokenize subsequent blocks
@@ -60,6 +68,7 @@ export default function footnote_plugin(md: MarkdownIt) {
     const oldBMark = state.bMarks[startLine]
     const oldTShift = state.tShift[startLine]
     const oldSCount = state.sCount[startLine]
+    const oldLength = state.tokens.length
 
     const posAfterColon = pos
     const initial =
@@ -94,7 +103,12 @@ export default function footnote_plugin(md: MarkdownIt) {
       state.sCount[startLine] += state.blkIndent
     }
 
+    console.log(state.tokens)
     state.md.block.tokenize(state, startLine, endLine)
+    console.log(state.tokens)
+    state.env.footnotes.defs[`:${label}`] = state.tokens.splice(
+      oldLength - state.tokens.length
+    )
 
     state.blkIndent -= 4
     state.tShift[startLine] = oldTShift

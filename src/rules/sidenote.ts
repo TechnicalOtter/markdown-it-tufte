@@ -5,20 +5,26 @@ import StateCore from "markdown-it/lib/rules_core/state_core"
 import StateInline from "markdown-it/lib/rules_inline/state_inline"
 import Token from "markdown-it/lib/token"
 
-// ###############################
-// I think the goal is to first find footnote references,
-// [^label] or ^[inline footnote content],
-// and split them off into their own block-level tokens.
-
-// WAIT: if footnote refs appear inside other blocks, we DO NOT want to split them.
-
-// Instead, let's define a `footnote_ref` token within an inline step,
-// then in a post-inline core rule, split inline tokens on the `footnote_ref` entries!
-
-// Then, after all block and inline renderers,
-// Cut the footnote definition tokens out of their old location,
-// and splice them into wherever the reference token is.
-// ###############################
+/*
+ * Sidenotes are managed using three rules:
+ *
+ * - footnote_def: block rule. Identifies footnote definitions, tokenizes their
+ * bodies (stripping p tags and replacing with br), and stores them in state.env
+ * for retrieval later.
+ *
+ * - footnote_ref: inline rule. Identifies footnote references, and adds a
+ * placeholder token with the label and any definition tokens retrieved in the
+ * footnote_def rule.
+ *
+ * - footnote_tail: core rule (post inline). The `footnote_ref` placeholder
+ * tokens only appear as children of `inline` tokens. Find each of these
+ * placeholders, and split the parent `inline` token so that the placeholder
+ * sits at the top level of the token array. Then, splice the footnote
+ * definition into the token array immediately after the ref placeholder.
+ *
+ * Additionally, a renderer for the `footnote_ref` token adds the appropriate
+ * markup for the label/checkbox-input toggle.
+ */
 
 function render_footnote_ref(
   tokens: Token[],

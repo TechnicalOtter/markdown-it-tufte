@@ -31,7 +31,7 @@
     "format": "prettier --write src/**/*.ts tests/**/*.ts",
     "lint": "eslint -c eslint.config.mjs --max-warnings 1 src/**/*.ts tests/**/*.ts",
     "lint:fix": "eslint -c eslint.config.mjs --fix src/**/*.ts tests/**/*.ts",
-    "test": "jest",
+    "test": "NODE_NO_WARNINGS=1 jest",
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
     "build:bundles": "rollup -c",

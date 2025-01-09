@@ -27,3 +27,13 @@ that are tangential to the flow<br>
 of the primary document.</span> into the margin next to the relevant text.</p>
 <p>Here is an entirely separate paragraph.</p>
 .
+
+Creates an inline side-note
+.
+Edward Tufte popularized moving footnotes^[a.k.a. tangential comments] into the margin next to the relevant text.
+
+Here is an entirely separate paragraph.
+.
+<p>Edward Tufte popularized moving footnotes<label for="sn-0" class="margin-toggle sidenote-number"></label><input id="sn-0" type="checkbox" class="margin-toggle"><span class="sidenote">a.k.a. tangential comments</span> into the margin next to the relevant text.</p>
+<p>Here is an entirely separate paragraph.</p>
+.

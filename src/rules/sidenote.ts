@@ -188,6 +188,43 @@ export default function footnote_plugin(md: MarkdownIt) {
     return true
   }
 
+  function footnote_ref_inline(state: StateInline, silent: boolean) {
+    const max = state.posMax
+    const start = state.pos
+
+    // should be at least 4 chars - "^[x]"
+    if (start + 3 > max) return false
+
+    if (state.src.charCodeAt(start) !== 0x5e /* ^ */) return false
+    if (state.src.charCodeAt(start + 1) !== 0x5b /* [ */) return false
+
+    const labelStart = start + 2
+    const labelEnd = md.helpers.parseLinkLabel(state, start + 1)
+
+    // parser failed to find ']', so it's not a valid note
+    if (labelEnd < 0) return false
+
+    if (!silent) {
+      if (!state.env.footnotes) state.env.footnotes = {}
+      if (!state.env.footnotes.defs) state.env.footnotes.defs = {}
+      const label = Object.keys(state.env.footnotes.defs).length
+      const tokens: Token[] = []
+
+      state.md.inline.parse(
+        state.src.slice(labelStart, labelEnd),
+        state.md,
+        state.env,
+        tokens
+      )
+
+      const token = state.push("footnote_ref", "", 0)
+      token.meta = { blocks: tokens, label }
+    }
+
+    state.pos = labelEnd + 1
+    return true
+  }
+
   function footnote_tail(state: StateCore) {
     const { tokens } = state
 
@@ -222,5 +259,6 @@ export default function footnote_plugin(md: MarkdownIt) {
 
   md.block.ruler.before("reference", "footnote_def", footnote_def)
   md.inline.ruler.after("image", "footnote_ref", footnote_ref)
+  md.inline.ruler.after("footnote_ref", "footnote_ref_inline", footnote_ref_inline)
   md.core.ruler.after("inline", "footnote_tail", footnote_tail)
 }

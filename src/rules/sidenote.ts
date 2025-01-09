@@ -123,17 +123,17 @@ export default function footnote_plugin(md: MarkdownIt) {
     state.md.block.tokenize(state, startLine, endLine)
     const footnoteTokens = state.tokens.splice(oldLength - state.tokens.length)
 
-    let hadClosingP = false
+    let hadOpeningP = false
     for (let i = footnoteTokens.length - 1; i >= 0; i--) {
       const token = footnoteTokens[i]
       if (token.tag === "p") {
         const insert =
-          hadClosingP && token.type === "paragraph_open"
-            ? [new state.Token("softbreak", "br", 0)]
+          hadOpeningP && token.type === "paragraph_close"
+            ? [new state.Token("hardbreak", "br", 0)]
             : []
         footnoteTokens.splice(i, 1, ...insert)
       }
-      hadClosingP = token.type === "paragraph_close"
+      hadOpeningP = token.type === "paragraph_open"
 
       if (token.type === "inline") {
         token.children ||= []

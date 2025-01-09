@@ -11,8 +11,8 @@
     "markdown-it-plugin"
   ],
   "type": "module",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/index.umd.min.js",
+  "module": "dist/index.esm.min.js",
   "unpkg": "dist/index.umd.min.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -21,9 +21,14 @@
   ],
   "exports": {
     ".": {
-      "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js",
-      "style": "./dist/css/style.min.css"
+      "require": {
+        "default": "./dist/index.umd.min.js",
+        "types": "./dist/types/index.d.ts"
+      },
+      "import": {
+        "default": "./dist/index.esm.min.js",
+        "types": "./dist/types/index.d.ts"
+      }
     }
   },
   "scripts": {
@@ -35,11 +40,9 @@
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
     "build:bundles": "rollup -c",
-    "build:esm": "tsc --module es2015   --outDir dist/esm",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "declarations": "tsc --declaration --emitDeclarationOnly --outDir dist/types",
-    "build": "npm-run-all -l clean -p build:cjs build:esm build:bundles declarations",
-    "build:watch": "rollup -c -w; npm run sass -w",
+    "build": "npm-run-all -l clean -p build:bundles declarations",
+    "build:watch": "rollup -c -w",
     "prepublishOnly": "npm run build"
   },
   "jest": {
@@ -55,11 +58,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.3.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@types/jest": "^29.5.14",
     "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
@@ -77,8 +81,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^3.4.2",
     "rimraf": "^3.0.2",
-    "rollup": "^3.9.1",
-    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup": "^4.30.1",
     "ts-jest": "^29.2.5",
     "typescript": "^4.9.4"
   }

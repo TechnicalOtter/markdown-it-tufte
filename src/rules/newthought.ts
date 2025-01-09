@@ -1,5 +1,5 @@
 import type MarkdownIt from "markdown-it/lib"
-import type StateInline from "markdown-it/lib/rules_inline/state_inline"
+import type StateInline from "markdown-it/lib/rules_inline/state_inline.js"
 
 /**
  * Adds "newthought" spans to inline sequences delimited with ^

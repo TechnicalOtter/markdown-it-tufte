@@ -1,8 +1,8 @@
-import MarkdownIt from "markdown-it"
-import StateBlock from "markdown-it/lib/rules_block/state_block"
-import StateCore from "markdown-it/lib/rules_core/state_core"
-import StateInline from "markdown-it/lib/rules_inline/state_inline"
-import Token from "markdown-it/lib/token"
+import type MarkdownIt from "markdown-it"
+import type StateBlock from "markdown-it/lib/rules_block/state_block.js"
+import type StateCore from "markdown-it/lib/rules_core/state_core.js"
+import type StateInline from "markdown-it/lib/rules_inline/state_inline.js"
+import type Token from "markdown-it/lib/token.js"
 
 /*
  * Sidenotes are managed using three rules:

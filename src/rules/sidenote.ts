@@ -25,14 +25,21 @@ import type Token from "markdown-it/lib/token.js"
  * markup for the label/checkbox-input toggle.
  */
 
-function render_footnote_ref(tokens: Token[], idx: number) {
+function render_sidenote_ref(tokens: Token[], idx: number) {
   const { label } = tokens[idx].meta
 
   return `<label for="sn-${label}" class="margin-toggle sidenote-number"></label><input id="sn-${label}" type="checkbox" class="margin-toggle">`
 }
 
+function render_marginnote_ref(tokens: Token[], idx: number) {
+  const { label } = tokens[idx].meta
+
+  return `<label for="mn-${label}" class="margin-toggle">&#8853;</label><input id="mn-${label}" type="checkbox" class="margin-toggle">`
+}
+
 export default function footnote_plugin(md: MarkdownIt) {
-  md.renderer.rules.footnote_ref = render_footnote_ref
+  md.renderer.rules.sidenote_ref = render_sidenote_ref
+  md.renderer.rules.marginnote_ref = render_marginnote_ref
 
   // Process footnote block definition
   function footnote_def(
@@ -180,7 +187,7 @@ export default function footnote_plugin(md: MarkdownIt) {
     if (typeof state.env.footnotes.defs[`:${label}`] === "undefined") return false
 
     if (!silent) {
-      const token = state.push("footnote_ref", "", 0)
+      const token = state.push("sidenote_ref", "", 0)
       token.meta = { blocks: state.env.footnotes.defs[`:${label}`], label }
     }
 
@@ -217,7 +224,7 @@ export default function footnote_plugin(md: MarkdownIt) {
         tokens
       )
 
-      const token = state.push("footnote_ref", "", 0)
+      const token = state.push("marginnote_ref", "", 0)
       token.meta = { blocks: tokens, label }
     }
 
@@ -235,16 +242,18 @@ export default function footnote_plugin(md: MarkdownIt) {
         const expandedTokens = []
         let refIdx
         while (
-          (refIdx = token.children.findIndex(token => token.type === "footnote_ref")) >
-          0
+          (refIdx = token.children.findIndex(token =>
+            ["sidenote_ref", "marginnote_ref"].includes(token.type)
+          )) > 0
         ) {
           const refToken = token.children[refIdx]
+          const { type } = refToken
           const { blocks } = refToken.meta
 
           const newInline = new state.Token("inline", "", 0)
           newInline.children = token.children.splice(0, refIdx + 1)
           const openSpan = new state.Token("span_open", "span", 1)
-          openSpan.attrSet("class", "sidenote")
+          openSpan.attrSet("class", type === "sidenote_ref" ? "sidenote" : "marginnote")
 
           expandedTokens.push(newInline)
           expandedTokens.push(openSpan)

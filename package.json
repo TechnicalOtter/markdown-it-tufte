@@ -10,6 +10,7 @@
     "markdown-it",
     "markdown-it-plugin"
   ],
+  "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "unpkg": "dist/index.umd.min.js",
@@ -28,8 +29,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "format": "prettier --write src/**/*.ts tests/**/*.ts",
-    "lint": "eslint -c .eslintrc.yml --max-warnings 1 src/**/*.ts tests/**/*.ts",
-    "lint:fix": "eslint -c .eslintrc.yml --fix src/**/*.ts tests/**/*.ts",
+    "lint": "eslint -c eslint.config.mjs --max-warnings 1 src/**/*.ts tests/**/*.ts",
+    "lint:fix": "eslint -c eslint.config.mjs --fix src/**/*.ts tests/**/*.ts",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:cov": "jest --coverage",
@@ -52,6 +53,8 @@
     "markdown-it": "^12.3.2"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-json": "^6.0.0",
@@ -68,6 +71,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^7.2.1",
+    "globals": "^15.14.0",
     "jest": "^29.7.0",
     "markdown-it": "^13.0.1",
     "npm-run-all": "^4.1.5",
@@ -77,8 +81,5 @@
     "rollup-plugin-typescript2": "^0.34.1",
     "ts-jest": "^29.2.5",
     "typescript": "^4.9.4"
-  },
-  "overrides": {
-    "ajv": "8.17.1"
   }
 }

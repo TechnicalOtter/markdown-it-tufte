@@ -1,5 +1,4 @@
-import MarkdownIt, { Options } from "markdown-it"
-import Renderer from "markdown-it/lib/renderer"
+import MarkdownIt from "markdown-it"
 import StateBlock from "markdown-it/lib/rules_block/state_block"
 import StateCore from "markdown-it/lib/rules_core/state_core"
 import StateInline from "markdown-it/lib/rules_inline/state_inline"
@@ -26,13 +25,7 @@ import Token from "markdown-it/lib/token"
  * markup for the label/checkbox-input toggle.
  */
 
-function render_footnote_ref(
-  tokens: Token[],
-  idx: number,
-  options: Options,
-  env: any,
-  slf: Renderer
-) {
+function render_footnote_ref(tokens: Token[], idx: number) {
   const { label } = tokens[idx].meta
 
   return `<label for="sn-${label}" class="margin-toggle sidenote-number"></label><input id="sn-${label}" type="checkbox" class="margin-toggle">`

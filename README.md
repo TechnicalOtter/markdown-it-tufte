@@ -16,7 +16,7 @@ The CI and NPM links will be updated as the library stabilizes!
 
 ## To-Do List
 
-- [ ] Complete side-note/margin-note implementation (specifically, the `{-}` prefix)
+- [x] Complete side-note/margin-note implementation (specifically, the `{-}` prefix)
 - [ ] Automatically split `<section>`s, based on `newthought`s and `h2`s
 - [ ] Change `newthought` to requiring a double caret `^^` delimiter (maybe?)
 

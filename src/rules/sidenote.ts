@@ -15,31 +15,29 @@ import type Token from "markdown-it/lib/token.js"
  * placeholder token with the label and any definition tokens retrieved in the
  * footnote_def rule.
  *
- * - footnote_tail: core rule (post inline). The `footnote_ref` placeholder
+ * - footnote_tail: core rule (post inline). The `sidenote_ref` placeholder
  * tokens only appear as children of `inline` tokens. Find each of these
  * placeholders, and split the parent `inline` token so that the placeholder
  * sits at the top level of the token array. Then, splice the footnote
  * definition into the token array immediately after the ref placeholder.
  *
- * Additionally, a renderer for the `footnote_ref` token adds the appropriate
+ * Additionally, a renderer for the `sidenote_ref` token adds the appropriate
  * markup for the label/checkbox-input toggle.
  */
 
 function render_sidenote_ref(tokens: Token[], idx: number) {
-  const { label } = tokens[idx].meta
+  const { label, margin } = tokens[idx].meta
+
+  if (margin) {
+    return `<label for="mn-${label}" class="margin-toggle">&#8853;</label><input id="mn-${label}" type="checkbox" class="margin-toggle">`
+  }
 
   return `<label for="sn-${label}" class="margin-toggle sidenote-number"></label><input id="sn-${label}" type="checkbox" class="margin-toggle">`
 }
 
-function render_marginnote_ref(tokens: Token[], idx: number) {
-  const { label } = tokens[idx].meta
-
-  return `<label for="mn-${label}" class="margin-toggle">&#8853;</label><input id="mn-${label}" type="checkbox" class="margin-toggle">`
-}
-
 export default function footnote_plugin(md: MarkdownIt) {
   md.renderer.rules.sidenote_ref = render_sidenote_ref
-  md.renderer.rules.marginnote_ref = render_marginnote_ref
+  md.renderer.rules.margin_marker = md.renderer.rules.text
 
   // Process footnote block definition
   function footnote_def(
@@ -148,7 +146,15 @@ export default function footnote_plugin(md: MarkdownIt) {
       }
     }
 
-    state.env.footnotes.defs[`:${label}`] = footnoteTokens
+    let margin = false
+    if (footnoteTokens[0].children?.[0].type === "margin_marker") {
+      margin = true
+      footnoteTokens[0].children.shift()
+    }
+    state.env.footnotes.defs[`:${label}`] = {
+      tokens: footnoteTokens,
+      margin
+    }
 
     state.blkIndent -= 4
     state.tShift[startLine] = oldTShift
@@ -188,7 +194,8 @@ export default function footnote_plugin(md: MarkdownIt) {
 
     if (!silent) {
       const token = state.push("sidenote_ref", "", 0)
-      token.meta = { blocks: state.env.footnotes.defs[`:${label}`], label }
+      const { tokens, margin } = state.env.footnotes.defs[`:${label}`]
+      token.meta = { blocks: tokens, label, margin }
     }
 
     state.pos = pos
@@ -218,18 +225,36 @@ export default function footnote_plugin(md: MarkdownIt) {
       const tokens: Token[] = []
 
       state.md.inline.parse(
-        state.src.slice(labelStart, labelEnd),
+        state.src.slice(labelStart, labelEnd).trim(),
         state.md,
         state.env,
         tokens
       )
 
-      const token = state.push("marginnote_ref", "", 0)
-      token.meta = { blocks: tokens, label }
+      const token = state.push("sidenote_ref", "", 0)
+      token.meta = { blocks: tokens, label, margin: tokens[0].type === "margin_marker" }
+      if (token.meta.margin) token.meta.blocks.shift()
     }
 
     state.pos = labelEnd + 1
     return true
+  }
+
+  const MARGIN_RE = /^\{-\}\s*/
+
+  function margin_marker(state: StateInline, silent: boolean) {
+    const match = state.src.slice(state.pos).match(MARGIN_RE)
+    if (match) {
+      if (!silent) {
+        const token = state.push("margin_marker", "", 0)
+        token.content = match[0]
+      }
+
+      state.pos += match[0].length
+      return true
+    }
+
+    return false
   }
 
   function footnote_tail(state: StateCore) {
@@ -242,18 +267,16 @@ export default function footnote_plugin(md: MarkdownIt) {
         const expandedTokens = []
         let refIdx
         while (
-          (refIdx = token.children.findIndex(token =>
-            ["sidenote_ref", "marginnote_ref"].includes(token.type)
-          )) > 0
+          (refIdx = token.children.findIndex(token => token.type === "sidenote_ref")) >
+          0
         ) {
           const refToken = token.children[refIdx]
-          const { type } = refToken
-          const { blocks } = refToken.meta
+          const { blocks, margin } = refToken.meta
 
           const newInline = new state.Token("inline", "", 0)
           newInline.children = token.children.splice(0, refIdx + 1)
           const openSpan = new state.Token("span_open", "span", 1)
-          openSpan.attrSet("class", type === "sidenote_ref" ? "sidenote" : "marginnote")
+          openSpan.attrSet("class", margin ? "marginnote" : "sidenote")
 
           expandedTokens.push(newInline)
           expandedTokens.push(openSpan)
@@ -269,5 +292,6 @@ export default function footnote_plugin(md: MarkdownIt) {
   md.block.ruler.before("reference", "footnote_def", footnote_def)
   md.inline.ruler.after("image", "footnote_ref", footnote_ref)
   md.inline.ruler.after("footnote_ref", "footnote_ref_inline", footnote_ref_inline)
+  md.inline.ruler.after("footnote_ref_inline", "margin_marker", margin_marker)
   md.core.ruler.after("inline", "footnote_tail", footnote_tail)
 }

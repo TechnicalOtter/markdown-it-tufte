@@ -25,3 +25,4 @@ There are plenty of "post-release" items to consider though:
 
 - [ ] Syntax for `<figure>`s
 - [ ] Epigraph-style block quotes, and `<footer>` citations
+- [ ] "Slug IDs" for sections (both header and newthought-based), for easy linking

@@ -15,16 +15,25 @@ function sectionize(state: StateCore) {
   // Stop BEFORE index zero, because we always prepend an opening section tag
   for (let i = state.tokens.length - 1; i > 0; i--) {
     const token = state.tokens[i]
+
     if (token.type === "heading_open" && token.tag === "h2") {
       const { open, close } = getSectionPair(state)
       state.tokens.splice(i, 0, close, open)
+    } else if (token.type === "paragraph_open") {
+      const inline = state.tokens[i + 1]
+      if (inline.type === "inline") {
+        const firstChild = inline.children?.[0]
+        if (firstChild?.type === "newthought_open") {
+          const { open, close } = getSectionPair(state)
+          state.tokens.splice(i, 0, close, open)
+        }
+      }
     }
   }
 
   const { open, close } = getSectionPair(state)
   state.tokens.unshift(open)
   state.tokens.push(close)
-  console.log(state.tokens)
 }
 
 export default function footnote_plugin(md: MarkdownIt) {

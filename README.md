@@ -26,3 +26,8 @@ There are plenty of "post-release" items to consider though:
 - [ ] Syntax for `<figure>`s
 - [ ] Epigraph-style block quotes, and `<footer>` citations
 - [ ] "Slug IDs" for sections (both header and newthought-based), for easy linking
+- [ ] Brainstorm: `<section>` splitting on `<hr>`.
+
+    Should it be done automatically? Perhaps choose one of the three possible markers (`*` `-` `_`) to be an "invisible" break, replaced with simply a `</section><section>`.
+
+    Note that, in doing so, we will also need to strip out empty (consecutive) sections created by e.g. a `***` followed by an second-level heading.

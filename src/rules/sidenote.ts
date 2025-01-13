@@ -231,8 +231,13 @@ export default function footnote_plugin(md: MarkdownIt) {
         tokens
       )
 
+      const margin = tokens[0].type === "margin_marker"
+      // We only add this to "defs" to maintain the appropriate footnote count.
+      // The pointers to data are just for code consistency.
+      state.env.footnotes.defs[`:${label}`] = { tokens, margin }
+
       const token = state.push("sidenote_ref", "", 0)
-      token.meta = { blocks: tokens, label, margin: tokens[0].type === "margin_marker" }
+      token.meta = { blocks: tokens, label, margin }
       if (token.meta.margin) token.meta.blocks.shift()
     }
 

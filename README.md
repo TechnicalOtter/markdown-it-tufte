@@ -18,7 +18,7 @@ The CI and NPM links will be updated as the library stabilizes!
 
 - [x] Complete side-note/margin-note implementation (specifically, the `{-}` prefix)
 - [ ] Automatically split `<section>`s, based on `newthought`s and `h2`s
-- [ ] Change `newthought` to requiring a double caret `^^` delimiter (maybe?)
+- [x] Change `newthought` to requiring a double caret `^^` delimiter (maybe?)
 
 Most likely, once the above items are complete, we'll do the first NPM-published package.
 There are plenty of "post-release" items to consider though:

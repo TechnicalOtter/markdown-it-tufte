@@ -7,12 +7,12 @@
 
 [ci-badge]: https://github.com/neillrobson/markdown-it-tufte/workflows/CI/badge.svg
 [ci-link]: https://github.com/neillrobson/markdown-it-tufte/actions
-[npm-badge]: https://img.shields.io/npm/v/markdown-it-plugin-template.svg
-[npm-link]: https://www.npmjs.com/package/markdown-it-plugin-template
+[npm-badge]: https://img.shields.io/npm/v/markdown-it-tufte.svg
+[npm-link]: https://www.npmjs.com/package/markdown-it-tufte
 
-## Under Construction
+## Pre-1.0.0 Package
 
-The CI and NPM links will be updated as the library stabilizes!
+Much of the syntax and structure is still subject to change, as I learn how to create a robust Markdown-It plugin!
 
 ## To-Do List
 

@@ -33,3 +33,11 @@ describe("Parses sidenote", () => {
     it(name, () => expect(rendered).toEqual(`${expected}\n`))
   })
 })
+
+describe("Parses section", () => {
+  readFixtures("sectionize").forEach(([name, text, expected]) => {
+    const mdit = MarkdownIt().use(example_plugin)
+    const rendered = mdit.render(text)
+    it(name, () => expect(rendered).toEqual(`${expected}\n`))
+  })
+})

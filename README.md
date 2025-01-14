@@ -31,3 +31,10 @@ There are plenty of "post-release" items to consider though:
     Should it be done automatically? Perhaps choose one of the three possible markers (`*` `-` `_`) to be an "invisible" break, replaced with simply a `</section><section>`.
 
     Note that, in doing so, we will also need to strip out empty (consecutive) sections created by e.g. a `***` followed by an second-level heading.
+
+### Chores
+
+To-do items that are not features or functional changes.
+
+- [ ] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
+- [ ] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?

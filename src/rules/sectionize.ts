@@ -18,7 +18,25 @@ function sectionize(state: StateCore) {
 
     if (token.type === "heading_open" && token.tag === "h2") {
       const { open, close } = getSectionPair(state)
-      state.tokens.splice(i, 0, close, open)
+
+      const divOpen = new state.Token("heading_open", "div", 1)
+      divOpen.block = true
+      divOpen.attrSet("class", "section-link")
+      const divClose = new state.Token("heading_close", "div", -1)
+      divClose.block = true
+      const anchorOpen = new state.Token("section_anchor_open", "a", 1)
+      const anchorClose = new state.Token("section_anchor_close", "a", -1)
+      const text = new state.Token("text", "", 0)
+      text.content = "Neill Link Text"
+
+      let j
+      for (j = i; j < state.tokens.length; j++) {
+        const { type, tag } = state.tokens[j]
+        if (type === "heading_close" && tag === "h2") break
+      }
+      state.tokens.splice(j + 1, 0, divClose)
+
+      state.tokens.splice(i, 0, close, open, divOpen, anchorOpen, text, anchorClose)
     } else if (token.type === "paragraph_open") {
       const inline = state.tokens[i + 1]
       if (inline.type === "inline") {
@@ -26,6 +44,13 @@ function sectionize(state: StateCore) {
         if (firstChild?.type === "newthought_open") {
           const { open, close } = getSectionPair(state)
           state.tokens.splice(i, 0, close, open)
+
+          const anchorOpen = new state.Token("section_anchor_open", "a", 1)
+          const anchorClose = new state.Token("section_anchor_close", "a", -1)
+          const text = new state.Token("text", "", 0)
+          text.content = "Neill Link Text"
+
+          inline.children?.splice(1, 0, anchorOpen, text, anchorClose)
         }
       }
     }

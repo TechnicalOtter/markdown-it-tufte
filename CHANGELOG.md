@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Nothing here yet!
 
+## [0.2.0]
+
+- Slug IDs for sections (defined by second-level headings and new-thoughts)
+
 ## [0.1.0] - 2025-01-13
 
 **Initial release!** :tada:
@@ -24,5 +28,6 @@ Nothing here yet!
   - Each second-level heading will trigger a section split immediately above it
   - Each paragraph starting with a new-thought will trigger a section split immediately above it
 
-[unreleased]: https://github.com/neillrobson/markdown-it-tufte/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/neillrobson/markdown-it-tufte/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/neillrobson/markdown-it-tufte/releases/tag/v0.2.0
 [0.1.0]: https://github.com/neillrobson/markdown-it-tufte/releases/tag/v0.1.0

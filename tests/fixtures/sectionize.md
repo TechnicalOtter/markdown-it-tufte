@@ -21,11 +21,15 @@ I like to write paragraphs.
 Sometimes in different sections.
 .
 <section>
-<h2>The First Heading</h2>
+<div class="section-link">
+<a class="no-tufte-underline" href="#the-first-heading"></a><h2>The First Heading</h2>
+</div>
 <p>I like to write paragraphs.</p>
 </section>
 <section>
-<h2>The Second Heading</h2>
+<div class="section-link">
+<a class="no-tufte-underline" href="#the-second-heading"></a><h2>The Second Heading</h2>
+</div>
 <p>Sometimes in different sections.</p>
 </section>
 .

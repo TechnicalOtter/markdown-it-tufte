@@ -43,10 +43,10 @@ Now the earth was formless and empty, as is the story when it is filled with vac
 ^^Emma Woodhouse, handsome, clever, and rich,^^ with a comfortable home and happy disposition, seemed to unite some of the best blessings of existence.
 .
 <section>
-<p><span class="newthought">In the beginning</span>, God created the heavens and the earth.</p>
+<p><span class="newthought"><a class="no-tufte-underline" href="#in-the-beginning"></a>In the beginning</span>, God created the heavens and the earth.</p>
 <p>Now the earth was formless and empty, as is the story when it is filled with vacuous machinations of my wandering mind. I just needed some extra content in this paragraph.</p>
 </section>
 <section>
-<p><span class="newthought">Emma Woodhouse, handsome, clever, and rich,</span> with a comfortable home and happy disposition, seemed to unite some of the best blessings of existence.</p>
+<p><span class="newthought"><a class="no-tufte-underline" href="#emma-woodhouse%2C-handsome%2C-clever%2C-and-rich%2C"></a>Emma Woodhouse, handsome, clever, and rich,</span> with a comfortable home and happy disposition, seemed to unite some of the best blessings of existence.</p>
 </section>
 .

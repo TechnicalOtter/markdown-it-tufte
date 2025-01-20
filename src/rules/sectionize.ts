@@ -56,12 +56,18 @@ function sectionize(state: StateCore) {
           const { open, close } = getSectionPair(state)
           state.tokens.splice(i, 0, close, open)
 
+          const newThoughtTokens =
+            inline.children?.slice(
+              1,
+              inline.children.findIndex(({ type }) => type === "newthought_close")
+            ) || []
+          const slug = slugify(getTokensText(newThoughtTokens))
           const anchorOpen = new state.Token("section_anchor_open", "a", 1)
+          anchorOpen.attrSet("class", "no-tufte-underline")
+          anchorOpen.attrSet("href", `#${slug}`)
           const anchorClose = new state.Token("section_anchor_close", "a", -1)
-          const text = new state.Token("text", "", 0)
-          text.content = "Neill Link Text"
 
-          inline.children?.splice(1, 0, anchorOpen, text, anchorClose)
+          inline.children?.splice(1, 0, anchorOpen, anchorClose)
         }
       }
     }

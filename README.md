@@ -38,3 +38,45 @@ To-do items that are not features or functional changes.
 
 - [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
 - [ ] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
+
+## Development Workflow
+
+**Setup**:
+
+```
+npm install
+```
+
+**Testing**:
+
+```
+npm test
+```
+
+**Building**:
+
+```
+npm build
+```
+
+**Publishing**:
+
+- Make sure the README and CHANGELOG are up to date for the version number _about to be created_.
+
+- Bump the NPM package version:
+
+    ```
+    npm version [patch|minor|major] -s "My release notes"
+    ```
+
+- Push the commit and tag to Github:
+
+    ```
+    git push --follow-tags
+    ```
+
+- Publish to the NPM registry (this will run the build task automatically beforehand):
+
+    ```
+    npm publish
+    ```

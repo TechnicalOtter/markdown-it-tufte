@@ -22,12 +22,16 @@ function getSectionPair(state: StateCore) {
 }
 
 function sectionize(state: StateCore) {
+  const slugs: Record<string, boolean> = {}
+  const toProcess: Array<{ slug: string; anchor: Token; target: Token }> = []
+
   // Iterate backwards since we're splicing elements into the array
   for (let i = state.tokens.length - 1; i >= 0; i--) {
     const token = state.tokens[i]
 
     if (token.type === "heading_open" && token.tag === "h2") {
       const slug = slugify(getTokensText(state.tokens[i + 1].children || []))
+
       const { open, close } = getSectionPair(state)
 
       const divOpen = new state.Token("heading_open", "div", 1)
@@ -37,8 +41,13 @@ function sectionize(state: StateCore) {
       divClose.block = true
       const anchorOpen = new state.Token("section_anchor_open", "a", 1)
       anchorOpen.attrSet("class", "no-tufte-underline")
-      anchorOpen.attrSet("href", `#${slug}`)
       const anchorClose = new state.Token("section_anchor_close", "a", -1)
+
+      toProcess.unshift({
+        slug,
+        anchor: anchorOpen,
+        target: token
+      })
 
       let j
       for (j = i; j < state.tokens.length; j++) {
@@ -62,15 +71,34 @@ function sectionize(state: StateCore) {
               inline.children.findIndex(({ type }) => type === "newthought_close")
             ) || []
           const slug = slugify(getTokensText(newThoughtTokens))
+
           const anchorOpen = new state.Token("section_anchor_open", "a", 1)
           anchorOpen.attrSet("class", "no-tufte-underline")
-          anchorOpen.attrSet("href", `#${slug}`)
           const anchorClose = new state.Token("section_anchor_close", "a", -1)
+
+          toProcess.unshift({
+            slug,
+            anchor: anchorOpen,
+            target: firstChild
+          })
 
           inline.children?.splice(1, 0, anchorOpen, anchorClose)
         }
       }
     }
+  }
+
+  for (const data of toProcess) {
+    const slugBase = data.slug
+    let slug = slugBase
+    let count = 0
+    while (slugs[slug]) {
+      slug = `${slugBase}-${++count}`
+    }
+    slugs[slug] = true
+
+    data.anchor.attrSet("href", `#${slug}`)
+    data.target.attrSet("id", slug)
   }
 
   if (state.tokens[0].type === "section_close") {

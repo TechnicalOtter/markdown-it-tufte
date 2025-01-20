@@ -15,7 +15,10 @@ import example_plugin from "../src"
  * */
 function readFixtures(name: string): string[][] {
   const fixtures = fs.readFileSync(`tests/fixtures/${name}.md`).toString()
-  return fixtures.split("\n.\n\n").map(s => s.split("\n.\n"))
+  return fixtures
+    .replace(/\r\n/g, "\n")
+    .split("\n.\n\n")
+    .map(s => s.split("\n.\n"))
 }
 
 describe("Parses newthought", () => {

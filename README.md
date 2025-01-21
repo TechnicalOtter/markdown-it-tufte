@@ -37,7 +37,7 @@ There are plenty of "post-release" items to consider though:
 To-do items that are not features or functional changes.
 
 - [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
-- [ ] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
+- [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
 
 ## Development Workflow
 

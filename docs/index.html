@@ -6,7 +6,6 @@
     <title>Tufte Markdown Demonstration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="tufte.css" />
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@12/dist/markdown-it.min.js"></script>
     <script src="https://unpkg.com/markdown-it-tufte"></script>
   </head>
@@ -40,14 +39,15 @@ Here's where things really get exciting. Markdown footnotes[^foots] are a conven
 
 [^foots]: [Footnotes](https://www.markdownguide.org/extended-syntax#footnotes) weren't actually part of the original markdown spec, but they've become a popular bolt-on.
         </textarea>
-        <div id="renderer" class="rendered"></div>
+        <iframe id="renderer" class="rendered" src="about:blank"></iframe>
       </div>
     </div>
     <noscript>You need to enable JavaScript to run this app!</noscript>
     <script>
       // get elements
       var inputText = document.getElementById("inputtext")
-      var renderer = document.getElementById("renderer")
+      var frame = document.getElementById("renderer");
+      var doc = frame.contentWindow.document;
 
       // setup change handler
       inputText.onchange = handleChange
@@ -56,7 +56,16 @@ Here's where things really get exciting. Markdown footnotes[^foots] are a conven
           .markdownit()
           .use(window.markdownitTufte)
           .render(e.target.value)
-        renderer.innerHTML = text
+
+        doc.open();
+        doc.write(`
+        <html>
+        <head>
+          <link rel="stylesheet" type="text/css" media="screen" href="tufte.css" />
+        </head>
+        <body>${ text }</body>
+        </html>`);
+        doc.close();
       }
 
       // trigger change handler for first render

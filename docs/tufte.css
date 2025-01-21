@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-/*
-Copied wholesale from the Tufte CSS website.
-Only change is body -> #renderer
-Used only for demonstration purposes in the GH Pages website.
-*/
-
 @font-face {
   font-family: "et-book";
   src: url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot");
@@ -79,7 +73,7 @@ html {
   font-size: 15px;
 }
 
-#renderer {
+body {
   width: 87.5%;
   margin-left: auto;
   margin-right: auto;
@@ -94,7 +88,7 @@ html {
 
 /* Adds dark mode */
 @media (prefers-color-scheme: dark) {
-  #renderer {
+  body {
     background-color: #151515;
     color: #ddd;
   }
@@ -409,7 +403,7 @@ label.margin-toggle:not(.sidenote-number) {
 }
 
 @media (max-width: 760px) {
-  #renderer {
+  body {
     width: 84%;
     padding-left: 8%;
     padding-right: 8%;

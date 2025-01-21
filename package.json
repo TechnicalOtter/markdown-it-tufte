@@ -43,7 +43,8 @@
     "declarations": "tsc --declaration --emitDeclarationOnly --outDir dist/types",
     "build": "npm-run-all -l clean -p build:bundles declarations",
     "build:watch": "rollup -c -w",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "docs": "http-server docs"
   },
   "jest": {
     "preset": "ts-jest"
@@ -77,6 +78,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^7.2.1",
     "globals": "^15.14.0",
+    "http-server": "^14.1.1",
     "jest": "^29.7.0",
     "markdown-it": "^13.0.1",
     "npm-run-all": "^4.1.5",

@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Nothing here yet!
 
-## [0.2.0]
+## [0.2.0] - 2025-01-20
+
+### Added
 
 - Slug IDs for sections (defined by second-level headings and new-thoughts)
 

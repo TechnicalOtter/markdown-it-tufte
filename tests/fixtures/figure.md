@@ -13,6 +13,23 @@ Paragraph after
 </section>
 .
 
+Image with caption
+.
+Paragraph before
+
+![alt text](/image.png "title text")
+
+Paragraph after
+.
+<section>
+<p>Paragraph before</p>
+<figure>
+<img src="/image.png" alt="alt text" title="title text"><figcaption>title text</figcaption>
+</figure>
+<p>Paragraph after</p>
+</section>
+.
+
 Leaves images inside other blocks alone
 .
 Paragraph before

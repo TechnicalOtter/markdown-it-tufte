@@ -1,6 +1,11 @@
 import type MarkdownIt from "markdown-it"
 import type StateCore from "markdown-it/lib/rules_core/state_core.js"
 
+/*
+ * Inspired by Alexs7zzh on Github
+ * https://gist.github.com/Alexs7zzh/d92ae991ad05ed585d072074ea527b5c
+ */
+
 const arrayReplaceAt = <T>(src: Array<T>, pos: number, newElements: Array<T>) => {
   return ([] as Array<T>).concat(src.slice(0, pos), newElements, src.slice(pos + 1))
 }

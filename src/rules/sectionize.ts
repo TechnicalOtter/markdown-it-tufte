@@ -111,5 +111,6 @@ function sectionize(state: StateCore) {
 }
 
 export default function footnote_plugin(md: MarkdownIt) {
-  md.core.ruler.after("inline", "sectionize", sectionize)
+  // Run after absolutely everything else. This increments the nesting level for all of the content within.
+  md.core.ruler.push("sectionize", sectionize)
 }

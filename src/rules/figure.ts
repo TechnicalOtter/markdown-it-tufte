@@ -31,6 +31,11 @@ export default function figure_plugin(md: MarkdownIt) {
       state.tokens[idx - 1] = new state.Token("figure_open", "figure", 1)
       state.tokens[idx - 1].block = true
 
+      state.tokens[idx - 1].attrs =
+        token.children[0].attrs?.filter(
+          ([name]) => !["src", "alt", "title"].includes(name)
+        ) || null
+
       const img = token.children[0],
         caption = img.attrGet("title")
 
@@ -58,5 +63,6 @@ export default function figure_plugin(md: MarkdownIt) {
     }
   }
 
-  md.core.ruler.after("inline", "figure", figure_def)
+  // markdown-it-attrs injects itself before linkify
+  md.core.ruler.after("linkify", "figure", figure_def)
 }

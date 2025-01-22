@@ -23,7 +23,7 @@ Much of the syntax and structure is still subject to change, as I learn how to c
 Most likely, once the above items are complete, we'll do the first NPM-published package.
 There are plenty of "post-release" items to consider though:
 
-- [ ] Syntax for `<figure>`s
+- [x] Syntax for `<figure>`s
 - [ ] Epigraph-style block quotes, and `<footer>` citations
 - [x] "Slug IDs" for sections (both header and newthought-based), for easy linking
 - [ ] Brainstorm: `<section>` splitting on `<hr>`.

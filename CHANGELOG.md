@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing here yet!
+### Added
+
+- Special parsing for standalone images (`![alt text](/path.png "title text")`) using `figure` and `figcaption`
 
 ## [0.2.0] - 2025-01-20
 

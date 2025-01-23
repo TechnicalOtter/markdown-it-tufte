@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
     <script src="https://unpkg.com/markdown-it-tufte"></script>
+    <script src="https://unpkg.com/markdown-it-attrs/markdown-it-attrs.browser.js"></script>
   </head>
   <body>
     <div class="main">
@@ -29,6 +30,8 @@
         <textarea id="inputtext" class="inputtext">
 # Markdown-It Tufte Demonstration
 
+With help from markdown-it-attrs {.subtitle}
+
 ^^Emma Woodhouse^^, handsome, clever, and rich, with a comfortable home and happy disposition, seemed to unite some of the best blessings of existence.
 
 Each "new thought" and second-level heading automatically gets a section break and an ID for URL fragment linking.
@@ -46,8 +49,18 @@ An image on its own line gets special rendering in a `figure` tag.
 ![tree in a field](/tree.jpg "I send my friends pictures of the most amazing trees")
 
 Notice how the `figcaption` is populated from the image title. Also note the different positionings of the caption based on the viewport size.
+
+A full-width image can be achieved with the `.fullwidth` class on the figure tag, easily added with the markdown-it-attrs plugin:
+
+![tree in a field](/tree.jpg "Are you obsessed with all my forest expertise?"){.fullwidth}
         </textarea>
         <iframe id="renderer" class="rendered" src="about:blank"></iframe>
+        <p>
+          <small>Note that the <a href="https://github.com/arve0/markdown-it-attrs">markdown-it-attrs</a> plugin is also included in this demo. It isn't required for the Tufte plugin to work, but it aids in adding some CSS classes to certain elements.</small>
+        </p>
+        <p>
+          <small>Aside from Tufte CSS, the only additional stylesheet used to achieve the above demo can be found <a href="tufte-extra.css">here</a>.</small>
+        </p>
       </div>
     </div>
     <noscript>You need to enable JavaScript to run this app!</noscript>
@@ -63,6 +76,7 @@ Notice how the `figcaption` is populated from the image title. Also note the dif
         const text = window
           .markdownit()
           .use(window.markdownitTufte)
+          .use(window.markdownItAttrs)
           .render(e.target.value)
 
         doc.open();

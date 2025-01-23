@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing here yet
+
+## [0.3.0] - 2025-01-23
+
 ### Added
 
 - Special parsing for standalone images (`![alt text](/path.png "title text")`) using `figure` and `figcaption`
@@ -33,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Each second-level heading will trigger a section split immediately above it
   - Each paragraph starting with a new-thought will trigger a section split immediately above it
 
-[Unreleased]: https://github.com/neillrobson/markdown-it-tufte/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/neillrobson/markdown-it-tufte/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/neillrobson/markdown-it-tufte/releases/tag/v0.3.0
 [0.2.0]: https://github.com/neillrobson/markdown-it-tufte/releases/tag/v0.2.0
 [0.1.0]: https://github.com/neillrobson/markdown-it-tufte/releases/tag/v0.1.0

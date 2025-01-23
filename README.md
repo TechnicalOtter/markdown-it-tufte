@@ -119,22 +119,44 @@ With the [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) plugin,
 
 ## To-Do List
 
+Before first NPM release (`0.1.0`):
+
 - [x] Complete side-note/margin-note implementation (specifically, the `{-}` prefix)
 - [x] Automatically split `<section>`s, based on `newthought`s and `h2`s
 - [x] Change `newthought` to requiring a double caret `^^` delimiter (maybe?)
 
-Most likely, once the above items are complete, we'll do the first NPM-published package.
-There are plenty of "post-release" items to consider though:
+Before first major release (`1.0.0`):
 
 - [x] Syntax for `<figure>`s
   - [x] Support `.fullwidth` as well (using `markdown-it-attrs`)
-- [ ] Epigraph-style block quotes, and `<footer>` citations
 - [x] "Slug IDs" for sections (both header and newthought-based), for easy linking
-- [ ] Brainstorm: `<section>` splitting on `<hr>`.
 
-    Should it be done automatically? Perhaps choose one of the three possible markers (`*` `-` `_`) to be an "invisible" break, replaced with simply a `</section><section>`.
+At this point, we might consider **an official 1.0.0 release**. The following items are potential future enhancements, but not necessary for a full-featured 1.0.0 plugin:
 
-    Note that, in doing so, we will also need to strip out empty (consecutive) sections created by e.g. a `***` followed by an second-level heading.
+- [ ] Epigraph-style block quotes, and `<footer>` citations
+
+  Although a dedicated syntax is possible, the manual HTML necessary for the same effect is pretty tame:
+
+  ```markdown
+  <div class="epigraph">
+
+  > Lots of people are misquoted on the Internet.
+  > <footer>Abraham Lincoln</footer>
+
+  </div>
+  ```
+
+  Considering epigraphs are not a heavily-used feature per Markdown document, a bit of manual HTML is a reasonable compromise.
+
+- [ ] `<section>` splitting on `<hr>`
+
+  Should it be done automatically? Some writers might use horizontal rules as a less intense pause than a section break. Others might want every HR to designate a new section. Still others might not care about HRs at all, but simply want a way to manually split sections *without* a corresponding H2 or new-thought.
+
+  Perhaps choose *one* of the three possible markers (`*` `-` `_`) to be an "invisible" break, replaced with simply a `</section><section>`.
+
+  Note that, in doing so, we will also need to strip out empty (consecutive) sections created by e.g. a `***` followed by an second-level heading.
+
+  Given the varying potential opinions on such a feature, and the relatively minor visual impact regardless, implementing this enhancement is not a high priority.
 
 ### Chores
 

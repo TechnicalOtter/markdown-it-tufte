@@ -19,7 +19,7 @@
 
 Install using your favorite package manager. You can then import and register the plugin using the standard markdown-it flow:
 
-```
+```javascript
 import MarkdownIt from "markdown-it";
 import MarkdownItTufte from "markdown-it-tufte";
 
@@ -29,6 +29,43 @@ const mdIt = MarkdownIt().use(MarkdownItTufte, {
 
 mdIt.render("^^Emma Woodhouse^^, handsome, clever, and rich...");
 ```
+
+## Usage & Syntax
+
+### Margin notes
+
+The standard Markdown footnote syntax is parsed into HTML that renders what Tufte CSS calls "side notes":
+
+```markdown
+Edward Tufte popularized side notes[^sidenotes] in his writing.
+
+[^sidenotes]: Footnotes whose definitions appear inline with their references.
+```
+
+The above Markdown will add a `<span>` with both the reference number *and* footnote definition all at the reference point. Tufte CSS styles that markup to put the definition off to the side of the main text.
+
+This plugin supports a few additional syntaxes and variants:
+
+- Leaving the caret outside the square brackets allows you to write the note contents entirely inline with the text, ideal for very short clarifications.
+
+  ```markdown
+  Edward Tufte popularized side notes^[inline footnotes] in his writing.
+  ```
+
+- Prefixing the note definition with `{-}` creates a note *without a reference number*. Since Tufte CSS positions all notes next to the relevant text, this variant reduces noise in the main material without losing the note's context.
+
+  ```markdown
+  Edward Tufte popularized side notes[^sidenotes] in his writing.
+  When they don't have reference numbers^[{-} little superscript digits] associated with them, they are called "margin notes."
+
+  [^sidenotes]: {-} Footnotes whose definitions appear inline with their references.
+  ```
+
+### "New thought" paragraph openers
+
+### Section splitting & URL-fragment hyperlinking
+
+### Figure images
 
 ## To-Do List
 

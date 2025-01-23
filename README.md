@@ -166,7 +166,7 @@ To-do items that are not features or functional changes.
 - [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
 - [x] Add an installation & usage guide to the README
 - [ ] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
-  - [ ] Header link buttons
+  - [x] Header link buttons
   - [ ] Improved `figcaption` styling
     - [ ] Perhaps submit this as a PR to the official Tufte CSS repo?
 

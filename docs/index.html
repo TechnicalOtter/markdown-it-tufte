@@ -6,10 +6,6 @@
     <title>Tufte Markdown Demonstration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <link rel="preload" href="tufte-css/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" crossorigin />
-    <link rel="preload" href="tufte-css/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" crossorigin />
-    <link rel="preload" href="tufte-css/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" crossorigin />
-    <link rel="preload" href="tufte-css/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" crossorigin />
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
     <script src="https://unpkg.com/markdown-it-tufte"></script>
   </head>
@@ -66,6 +62,7 @@ Here's where things really get exciting. Markdown footnotes[^foots] are a conven
         <html>
         <head>
           <link rel="stylesheet" type="text/css" media="screen" href="tufte-css/tufte.css" />
+          <link rel="stylesheet" type="text/css" media="screen" href="/tufte-extra.css" />
         </head>
         <body>${ text }</body>
         </html>`);

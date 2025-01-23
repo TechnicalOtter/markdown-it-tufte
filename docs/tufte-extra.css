@@ -1,0 +1,47 @@
+/*
+===================================
+URL fragment link button formatting
+===================================
+*/
+
+.section-link,
+.newthought {
+  position: relative;
+}
+
+.section-link > a:first-child,
+.newthought > a:first-child {
+  position: absolute;
+  display: block;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -28px;
+  opacity: 0;
+}
+
+.section-link:hover > a:first-child,
+.newthought:hover > a:first-child {
+  opacity: 1;
+}
+
+.section-link > a:first-child::before,
+.newthought > a:first-child::before {
+  content: "";
+  mask: url(/link.svg) no-repeat 50% 50%;
+  mask-size: cover;
+  background-color: currentColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+}
+
+/*
+===========================
+Figure caption enhancements
+===========================
+*/

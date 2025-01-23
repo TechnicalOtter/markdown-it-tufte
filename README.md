@@ -10,9 +10,25 @@
 [npm-badge]: https://img.shields.io/npm/v/markdown-it-tufte.svg
 [npm-link]: https://www.npmjs.com/package/markdown-it-tufte
 
-## Pre-1.0.0 Package
+## Installation & Setup
 
-Much of the syntax and structure is still subject to change, as I learn how to create a robust Markdown-It plugin!
+> [!WARNING]
+> This plugin is still pre-1.0.0.
+>
+> Much of the syntax and structure is still subject to change, as I learn how to create a robust Markdown-It plugin!
+
+Install using your favorite package manager. You can then import and register the plugin using the standard markdown-it flow:
+
+```
+import MarkdownIt from "markdown-it";
+import MarkdownItTufte from "markdown-it-tufte";
+
+const mdIt = MarkdownIt().use(MarkdownItTufte, {
+  // options, though this plugin has no configurability yet
+});
+
+mdIt.render("^^Emma Woodhouse^^, handsome, clever, and rich...");
+```
 
 ## To-Do List
 
@@ -39,6 +55,7 @@ To-do items that are not features or functional changes.
 
 - [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
 - [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
+- [ ] Add an installation & usage guide to the README
 - [ ] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
   - [ ] Header link buttons
   - [ ] Improved `figcaption` styling

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Special parsing for standalone images (`![alt text](/path.png "title text")`) using `figure` and `figcaption`
+  - If the [`markdown-it-attrs`](https://github.com/arve0/markdown-it-attrs) plugin is installed, adding `{.fullwidth}` at the end of an image will add that class to the `figure`.
 
 ## [0.2.0] - 2025-01-20
 

@@ -24,6 +24,7 @@ Most likely, once the above items are complete, we'll do the first NPM-published
 There are plenty of "post-release" items to consider though:
 
 - [x] Syntax for `<figure>`s
+  - [x] Support `.fullwidth` as well (using `markdown-it-attrs`)
 - [ ] Epigraph-style block quotes, and `<footer>` citations
 - [x] "Slug IDs" for sections (both header and newthought-based), for easy linking
 - [ ] Brainstorm: `<section>` splitting on `<hr>`.
@@ -38,6 +39,10 @@ To-do items that are not features or functional changes.
 
 - [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
 - [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
+- [ ] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
+  - [ ] Header link buttons
+  - [ ] Improved `figcaption` styling
+    - [ ] Perhaps submit this as a PR to the official Tufte CSS repo?
 
 ## Development Workflow
 

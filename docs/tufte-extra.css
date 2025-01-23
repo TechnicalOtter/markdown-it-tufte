@@ -29,7 +29,7 @@ URL fragment link button formatting
 .section-link > a:first-child::before,
 .newthought > a:first-child::before {
   content: "";
-  mask: url(/link.svg) no-repeat 50% 50%;
+  mask: url(link.svg) no-repeat 50% 50%;
   mask-size: cover;
   background-color: currentColor;
   position: absolute;

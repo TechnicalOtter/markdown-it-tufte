@@ -63,9 +63,59 @@ This plugin supports a few additional syntaxes and variants:
 
 ### "New thought" paragraph openers
 
+As an alternative to separating sections of an article by headers, the first few words of a new section can be set in small-caps. Tufte CSS calls these spans "new thoughts."
+
+The syntax is simple: surround the first few words with double carets.
+
+```markdown
+^^The quick brown fox^^ jumps over the lazy dog.
+```
+
+Note that, while any inline string of text can be surrounded by double-carets to create small caps, *only double-carets that begin a new paragraph* will receive the automatic section-splitting treatment described in the following section.
+
 ### Section splitting & URL-fragment hyperlinking
 
+All Markdown documents will be surrounded by a `<section>` tag, regardless of contents. Tufte CSS uses sections to aid in properly positioning side notes.
+
+Additionally, certain elements will trigger a section break: specifically, **second-level headings** and **new-thoughts initiating new paragraphs**. Although Tufte style guidelines discourage mixing these two styles, this plugin supports any combination in a single document.
+
+The markup generated for `h2`s and `.newthought`s also includes an **empty anchor tag**, with a URL fragment link directed at that element/section. These anchors, while invisible by default, can be styled to add "copy link" buttons to those section headers.
+
+Example input and output:
+
+```markdown
+## Recent Entries
+```
+
+```html
+<div class="section-link">
+  <a class="no-tufte-underline" href="#recent-entries"></a><h2 id="recent-entries">Recent Entries</h2>
+</div>
+```
+
 ### Figure images
+
+Images have the same syntax as standard Markdown (i.e. `![alt text](/path/file.png "title text")`). However, when placed as solitary elements in their own paragraph, this plugin converts them into `<figure>`s as such:
+
+```html
+<figure>
+  <img src="/path/file.png" alt="alt text" title="title text"><figcaption>title text</figcaption>
+</figure>
+```
+
+Tufte CSS is [a bit lacking](https://github.com/edwardtufte/tufte-css/issues/44) when it comes to `<figcaption>` styling, but simple CSS overrides should be able to achieve whatever visual effect is desired (whether that be captions below the image, or off to the side as margin notes).
+
+With the [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) plugin, the `.fullwidth` class can be added to figures too, like so:
+
+```markdown
+![alt text](/path/file.png "title text"){.fullwidth}
+```
+
+```html
+<figure class="fullwidth">
+  <img src="/path/file.png" alt="alt text" title="title text"><figcaption>title text</figcaption>
+</figure>
+```
 
 ## To-Do List
 
@@ -92,7 +142,7 @@ To-do items that are not features or functional changes.
 
 - [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
 - [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
-- [ ] Add an installation & usage guide to the README
+- [x] Add an installation & usage guide to the README
 - [ ] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
   - [ ] Header link buttons
   - [ ] Improved `figcaption` styling

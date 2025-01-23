@@ -169,10 +169,10 @@ To-do items that are not features or functional changes.
 - [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
 - [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
 - [x] Add an installation & usage guide to the README
-- [ ] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
+- [x] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
   - [x] Header link buttons
-  - [ ] Improved `figcaption` styling
-    - [ ] Perhaps submit this as a PR to the official Tufte CSS repo?
+  - [x] Improved `figcaption` styling
+    - [x] Submit this as a PR to the official Tufte CSS repo (started the conversation in [this issue thread](https://github.com/edwardtufte/tufte-css/issues/44#issuecomment-2610993016))
 
 ## Development Workflow
 

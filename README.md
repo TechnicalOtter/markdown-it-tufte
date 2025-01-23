@@ -131,7 +131,11 @@ Before first major release (`1.0.0`):
   - [x] Support `.fullwidth` as well (using `markdown-it-attrs`)
 - [x] "Slug IDs" for sections (both header and newthought-based), for easy linking
 
-At this point, we might consider **an official 1.0.0 release**. The following items are potential future enhancements, but not necessary for a full-featured 1.0.0 plugin:
+At this point, we might consider **an official 1.0.0 release**.
+There will probably be a period of at least a week or two where we have all the aforementioned features on a pre-1.0.0 release,
+to spend some time using the plugin and discovering potential incompatibilities or pitfalls in the implementation.
+
+The following items are potential future enhancements, but not necessary for a full-featured 1.0.0 plugin:
 
 - [ ] Epigraph-style block quotes, and `<footer>` citations
 
@@ -197,7 +201,7 @@ npm build
 - Bump the NPM package version:
 
     ```
-    npm version [patch|minor|major] -s "My release notes"
+    npm version [patch|minor|major] -m "My release notes"
     ```
 
 - Push the commit and tag to Github:

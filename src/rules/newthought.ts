@@ -95,17 +95,17 @@ function postProcess(state: StateInline, delimiters: StateInline.Delimiter[]) {
     }
   }
 
-  // If a marker sequence has an odd number of characters, it's splitted
+  // If a marker sequence has an odd number of characters, it is split
   // like this: `^^^^^` -> `^` + `^^` + `^^`, leaving one marker at the
   // start of the sequence.
   //
-  // So, we have to move all those markers after subsequent s_close tags.
+  // So, we have to move all those markers after subsequent closing tags.
   //
   while (loneMarkers.length) {
     const i = loneMarkers.pop() || 0
     let j = i + 1
 
-    while (j < state.tokens.length && state.tokens[j].type === "s_close") {
+    while (j < state.tokens.length && state.tokens[j].type === "newthought_close") {
       j++
     }
 

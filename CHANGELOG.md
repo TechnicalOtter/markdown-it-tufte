@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing here yet
+### Fixed
+
+- Lone/dangling carets in newthought markers are now consistently shifted outside the resulting span tag
 
 ## [0.3.0] - 2025-01-23
 

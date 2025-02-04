@@ -162,6 +162,10 @@ The following items are potential future enhancements, but not necessary for a f
 
   Given the varying potential opinions on such a feature, and the relatively minor visual impact regardless, implementing this enhancement is not a high priority.
 
+### Known Bugs
+
+- `<figure>` styling only works for images in "top-level" paragraphs (standalone images in lists, for example, still render as naked `<img>` tags)
+
 ### Chores
 
 To-do items that are not features or functional changes.

@@ -12,15 +12,10 @@ const arrayReplaceAt = <T>(src: Array<T>, pos: number, newElements: Array<T>) =>
 
 export default function figure_plugin(md: MarkdownIt) {
   const figure_def = (state: StateCore) => {
-    let nesting = 0
     for (let idx = state.tokens.length - 1; idx >= 0; idx--) {
-      nesting += state.tokens[idx].nesting
-      if (state.tokens[idx].type !== "inline") continue
-      // Iterating backwards, hitting closing tags first:
-      // -1 nesting means one level deep, -2 means two levels, etc
-      if (nesting !== -1) continue
-
       const token = state.tokens[idx]
+
+      if (token.type !== "inline") continue
       if (token.children?.length !== 1) continue
       if (token.children[0].type !== "image") continue
       if (state.tokens[idx + 1].type !== "paragraph_close") continue

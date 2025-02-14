@@ -30,18 +30,24 @@ Paragraph after
 </section>
 .
 
-Leaves images inside other blocks alone
+Captures standalone images inside other blocks
 .
 Paragraph before
 
+> Quote before
+>
 > ![alt text](/image.png)
+>
+> Quote ![alt text](/image.png) after
 
 Paragraph after
 .
 <section>
 <p>Paragraph before</p>
 <blockquote>
-<p><img src="/image.png" alt="alt text"></p>
+<p>Quote before</p>
+<figure><img src="/image.png" alt="alt text"></figure>
+<p>Quote <img src="/image.png" alt="alt text"> after</p>
 </blockquote>
 <p>Paragraph after</p>
 </section>

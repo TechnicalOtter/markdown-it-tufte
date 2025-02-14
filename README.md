@@ -164,7 +164,7 @@ The following items are potential future enhancements, but not necessary for a f
 
 ### Known Bugs
 
-- `<figure>` styling only works for images in "top-level" paragraphs (standalone images in lists, for example, still render as naked `<img>` tags)
+- None at this time
 
 ### Chores
 

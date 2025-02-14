@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Lone/dangling carets in newthought markers are now consistently shifted outside the resulting span tag
+- Standalone images inside other blocks are now captured and rendered as `<figure>` elements
 
 ## [0.3.0] - 2025-01-23
 

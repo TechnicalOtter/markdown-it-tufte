@@ -12,11 +12,6 @@
 
 ## Installation & Setup
 
-> [!WARNING]
-> This plugin is still pre-1.0.0.
->
-> Much of the syntax and structure is still subject to change, as I learn how to create a robust Markdown-It plugin!
-
 Install using your favorite package manager. You can then import and register the plugin using the standard markdown-it flow:
 
 ```javascript
@@ -119,23 +114,13 @@ With the [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) plugin,
 
 ## To-Do List
 
-Before first NPM release (`0.1.0`):
+### Known Bugs
 
-- [x] Complete side-note/margin-note implementation (specifically, the `{-}` prefix)
-- [x] Automatically split `<section>`s, based on `newthought`s and `h2`s
-- [x] Change `newthought` to requiring a double caret `^^` delimiter (maybe?)
+- None at this time
 
-Before first major release (`1.0.0`):
+### Ideas
 
-- [x] Syntax for `<figure>`s
-  - [x] Support `.fullwidth` as well (using `markdown-it-attrs`)
-- [x] "Slug IDs" for sections (both header and newthought-based), for easy linking
-
-At this point, we might consider **an official 1.0.0 release**.
-There will probably be a period of at least a week or two where we have all the aforementioned features on a pre-1.0.0 release,
-to spend some time using the plugin and discovering potential incompatibilities or pitfalls in the implementation.
-
-The following items are potential future enhancements, but not necessary for a full-featured 1.0.0 plugin:
+Half-baked thoughts and nice-to-haves that may be added in the future.
 
 - [ ] Epigraph-style block quotes, and `<footer>` citations
 
@@ -161,10 +146,6 @@ The following items are potential future enhancements, but not necessary for a f
   Note that, in doing so, we will also need to strip out empty (consecutive) sections created by e.g. a `***` followed by an second-level heading.
 
   Given the varying potential opinions on such a feature, and the relatively minor visual impact regardless, implementing this enhancement is not a high priority.
-
-### Known Bugs
-
-- None at this time
 
 ### Chores
 

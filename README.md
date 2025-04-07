@@ -116,7 +116,9 @@ With the [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) plugin,
 
 ### Known Bugs
 
-- None at this time
+- Inline footnotes (using the `^[my footnote content]` style) do not receive any core rule processing (e.g. typographic replacements, smart quotes).
+
+  Current workaround is to split them out into dedicated footnote blocks (i.e. `[^tag]` and, later, `[^tag]: my footnote content`).
 
 ### Ideas
 
@@ -150,14 +152,6 @@ Half-baked thoughts and nice-to-haves that may be added in the future.
 ### Chores
 
 To-do items that are not features or functional changes.
-
-- [x] Add a [CHANGELOG](https://keepachangelog.com/en/1.1.0/)
-- [x] Update demo site to use Tufte CSS submodule: perhaps needs an iframe so that `<body>` tag is present?
-- [x] Add an installation & usage guide to the README
-- [x] Add examples of "extra" CSS that can be used alongside `tufte.css` and this plugin to enhance final result
-  - [x] Header link buttons
-  - [x] Improved `figcaption` styling
-    - [x] Submit this as a PR to the official Tufte CSS repo (started the conversation in [this issue thread](https://github.com/edwardtufte/tufte-css/issues/44#issuecomment-2610993016))
 
 ## Development Workflow
 

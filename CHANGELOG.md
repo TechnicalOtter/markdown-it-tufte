@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Nothing at this time
+- Inline sidenotes are now parsed by the Typographer extension
 
 ## [1.0.0] - 2025-02-14
 

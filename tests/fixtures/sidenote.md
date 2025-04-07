@@ -79,7 +79,7 @@ Edward Tufte popularized moving footnotes^[{-} a.k.a. tangential comments] into 
 Here is an entirely separate paragraph.
 .
 <section>
-<p>Edward Tufte popularized moving footnotes<label for="mn-0" class="margin-toggle">&#8853;</label><input id="mn-0" type="checkbox" class="margin-toggle"><span class="marginnote">a.k.a. tangential comments</span> into the margin<label for="mn-1" class="margin-toggle">&#8853;</label><input id="mn-1" type="checkbox" class="margin-toggle"><span class="marginnote">hence the name &quot;margin note&quot;</span> next to the relevant text.</p>
+<p>Edward Tufte popularized moving footnotes<label for="mn-0" class="margin-toggle">&#8853;</label><input id="mn-0" type="checkbox" class="margin-toggle"><span class="marginnote">a.k.a. tangential comments</span> into the margin<label for="mn-1" class="margin-toggle">&#8853;</label><input id="mn-1" type="checkbox" class="margin-toggle"><span class="marginnote">hence the name “margin note”</span> next to the relevant text.</p>
 <p>Here is an entirely separate paragraph.</p>
 </section>
 .

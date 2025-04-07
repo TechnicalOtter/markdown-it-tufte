@@ -222,23 +222,22 @@ export default function footnote_plugin(md: MarkdownIt) {
       if (!state.env.footnotes) state.env.footnotes = {}
       if (!state.env.footnotes.defs) state.env.footnotes.defs = {}
       const label = Object.keys(state.env.footnotes.defs).length
-      const tokens: Token[] = []
+      const inline = new state.Token("inline", "", 0)
+      inline.content = state.src.slice(labelStart, labelEnd).trim()
+      inline.children = []
+      const tokens: Token[] = [inline]
 
-      state.md.inline.parse(
-        state.src.slice(labelStart, labelEnd).trim(),
-        state.md,
-        state.env,
-        tokens
-      )
+      state.md.inline.parse(inline.content, state.md, state.env, inline.children)
 
-      const margin = tokens[0].type === "margin_marker"
+      const margin = inline.children[0].type === "margin_marker"
+      if (margin) inline.children.shift()
+
       // We only add this to "defs" to maintain the appropriate footnote count.
       // The pointers to data are just for code consistency.
       state.env.footnotes.defs[`:${label}`] = { tokens, margin }
 
       const token = state.push("sidenote_ref", "", 0)
       token.meta = { blocks: tokens, label, margin }
-      if (token.meta.margin) token.meta.blocks.shift()
     }
 
     state.pos = labelEnd + 1

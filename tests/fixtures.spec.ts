@@ -31,7 +31,7 @@ describe("Parses newthought", () => {
 
 describe("Parses sidenote", () => {
   readFixtures("sidenote").forEach(([name, text, expected]) => {
-    const mdit = MarkdownIt().use(example_plugin)
+    const mdit = MarkdownIt({ typographer: true }).use(example_plugin)
     const rendered = mdit.render(text)
     it(name, () => expect(rendered).toEqual(`${expected}\n`))
   })

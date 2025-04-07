@@ -2,24 +2,24 @@ Creates a standard side-note
 .
 Edward Tufte popularized moving footnotes[^1] into the margin next to the relevant text.
 
-[^1]: Comments and asides that are tangential to the flow of the primary document.
+[^1]: Comments and asides... that are tangential to the flow of the primary document.
 
 Here is an entirely separate paragraph.
 .
 <section>
-<p>Edward Tufte popularized moving footnotes<label for="sn-1" class="margin-toggle sidenote-number"></label><input id="sn-1" type="checkbox" class="margin-toggle"><span class="sidenote">Comments and asides that are tangential to the flow of the primary document.</span> into the margin next to the relevant text.</p>
+<p>Edward Tufte popularized moving footnotes<label for="sn-1" class="margin-toggle sidenote-number"></label><input id="sn-1" type="checkbox" class="margin-toggle"><span class="sidenote">Comments and asides… that are tangential to the flow of the primary document.</span> into the margin next to the relevant text.</p>
 <p>Here is an entirely separate paragraph.</p>
 </section>
 .
 
 Creates an inline side-note
 .
-Edward Tufte popularized moving footnotes^[a.k.a. tangential comments] into the margin next to the relevant text.
+Edward Tufte popularized moving footnotes^[a.k.a. tangential comments... with replacements] into the margin next to the relevant text.
 
 Here is an entirely separate paragraph.
 .
 <section>
-<p>Edward Tufte popularized moving footnotes<label for="sn-0" class="margin-toggle sidenote-number"></label><input id="sn-0" type="checkbox" class="margin-toggle"><span class="sidenote">a.k.a. tangential comments</span> into the margin next to the relevant text.</p>
+<p>Edward Tufte popularized moving footnotes<label for="sn-0" class="margin-toggle sidenote-number"></label><input id="sn-0" type="checkbox" class="margin-toggle"><span class="sidenote">a.k.a. tangential comments… with replacements</span> into the margin next to the relevant text.</p>
 <p>Here is an entirely separate paragraph.</p>
 </section>
 .

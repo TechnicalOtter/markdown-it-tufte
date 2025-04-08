@@ -116,9 +116,7 @@ With the [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) plugin,
 
 ### Known Bugs
 
-- Inline footnotes (using the `^[my footnote content]` style) do not receive any core rule processing (e.g. typographic replacements, smart quotes).
-
-  Current workaround is to split them out into dedicated footnote blocks (i.e. `[^tag]` and, later, `[^tag]: my footnote content`).
+None at this time.
 
 ### Ideas
 

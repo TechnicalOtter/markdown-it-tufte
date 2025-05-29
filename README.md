@@ -25,6 +25,23 @@ const mdIt = MarkdownIt().use(MarkdownItTufte, {
 mdIt.render("^^Emma Woodhouse^^, handsome, clever, and rich...");
 ```
 
+### Eleventy Installation
+
+Neill's personal website, found [here](https://github.com/neillrobson/neillrobson.github.io) on GitHub, currently uses the Markdown-It Tufte plugin in its build process.
+
+For quick reference, the following code in `eleventy.config.js` should set up the plugin in Eleventy:
+
+```javascript
+import MarkdownItTufte from "markdown-it-tufte";
+
+export default async function (eleventyConfig) {
+  eleventyConfig.amendLibrary("md", (mdLib) => {
+    mdLib.use(MarkdownItTufte);
+    mdLib.set({ html: true, typographer: true });
+  })
+}
+```
+
 ## Usage & Syntax
 
 ### Margin notes

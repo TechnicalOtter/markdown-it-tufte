@@ -29,7 +29,7 @@ function render_sidenote_ref(tokens: Token[], idx: number) {
   const { label, margin } = tokens[idx].meta
 
   if (margin) {
-    return `<label for="mn-${label}" class="margin-toggle">&#8853;</label><input id="mn-${label}" type="checkbox" class="margin-toggle">`
+    return `<label for="mn-${label}" class="margin-toggle">&#8225;</label><input id="mn-${label}" type="checkbox" class="margin-toggle">`
   }
 
   return `<label for="sn-${label}" class="margin-toggle sidenote-number"></label><input id="sn-${label}" type="checkbox" class="margin-toggle">`
